@@ -1,0 +1,10 @@
+#game {
+	width: 336px;
+}
+
+#moveCounter {
+	text-align: center;
+	margin-top: 10px;
+	font-family: Arial;
+	font-size: 30px;
+}

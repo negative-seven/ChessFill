@@ -36,6 +36,7 @@ class Game {
 		piece.frozen = true
 
 		this.moves++
+		document.getElementById("moveCounter").innerText = ("Moves: " + this.moves)
 	}
 
 	onclick(e) {
@@ -120,10 +121,6 @@ class Game {
 				}
 			}
 		}
-
-		this.context.fillStyle = "black"
-		this.context.font = "30px Arial"
-		this.context.fillText("Moves: " + this.moves, 360, 40)
 	}
 
 	placeRandomPieces(count) {
