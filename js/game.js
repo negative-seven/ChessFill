@@ -42,19 +42,16 @@ class Game {
 		var tileCoords = new Position(Math.floor((e.offsetX - Game.BORDER_WIDTH) / Game.TILE_WIDTH), Math.floor((e.offsetY - Game.BORDER_WIDTH) / Game.TILE_HEIGHT))
 		var piece = this.board[tileCoords.x][tileCoords.y]
 
-		if (this.selectedPiece && tileCoords.equals(this.selectedPiece.position))
-		{
+		if (this.selectedPiece && tileCoords.equals(this.selectedPiece.position)) {
 			this.selectedPiece = undefined
 			this.activeDestinationTiles = []
 		}
-		else if (this.activeDestinationTiles.some(i => i.equals(tileCoords)))
-		{
+		else if (this.activeDestinationTiles.some(i => i.equals(tileCoords))) {
 			this.move(this.selectedPiece.position, tileCoords)
 			this.selectedPiece = undefined
 			this.activeDestinationTiles = []
 
-			if (Math.random() < 0.95 )
-			{
+			if (Math.random() < 0.95) {
 				this.placeRandomPieces(1)
 			}
 		}
@@ -62,8 +59,7 @@ class Game {
 			this.selectedPiece = piece
 			this.activeDestinationTiles = piece.getDestinationTiles()
 		}
-		else
-		{
+		else {
 			this.selectedPiece = undefined
 			this.activeDestinationTiles = []
 		}
@@ -84,14 +80,12 @@ class Game {
 				var tileDimensions = [Game.BORDER_WIDTH + x * Game.TILE_WIDTH, Game.BORDER_WIDTH + y * Game.TILE_HEIGHT, Game.TILE_WIDTH, Game.TILE_HEIGHT]
 				this.context.fillRect(...tileDimensions)
 
-				if (this.board[x][y] && this.board[x][y].frozen)
-				{
+				if (this.board[x][y] && this.board[x][y].frozen) {
 					this.context.fillStyle = "#800000"
 					this.context.fillRect(...tileDimensions)
 				}
 
-				if (this.activeDestinationTiles.some(i => i.x == x && i.y == y))
-				{
+				if (this.activeDestinationTiles.some(i => i.x == x && i.y == y)) {
 					this.context.fillStyle = "#109010c0"
 					this.context.fillRect(...tileDimensions)
 				}
@@ -157,12 +151,10 @@ class Game {
 				[0.08, Piece.PieceType.ROOK],
 			]
 			var pieceRandom = Math.random()
-			for (var i of pieceChances)
-			{
-				if (pieceRandom < i[0])
-				{
+			for (var i of pieceChances) {
+				if (pieceRandom < i[0]) {
 					var piece = i[1]
-					break;
+					break
 				}
 
 				pieceRandom -= i[0]

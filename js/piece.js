@@ -25,13 +25,13 @@ class Piece {
 					new Position(-1, -1),
 					new Position(-1, 1),
 					new Position(1, -1),
-					new Position(1, 1)
+					new Position(1, 1),
 				]) {
 					for (var steps = 1; steps <= 7; steps++) {
 						var position = new Position(this.position.x + vector.x * steps, this.position.y + vector.y * steps)
 
 						if (position.x < 0 || position.x >= Game.TILE_COUNT_X || position.y < 0 || position.y >= Game.TILE_COUNT_Y) {
-							break;
+							break
 						}
 
 						tiles.push(position)
@@ -71,10 +71,8 @@ class Piece {
 					new Position(this.position.x + 1, this.position.y),
 					new Position(this.position.x, this.position.y - 1),
 					new Position(this.position.x, this.position.y + 1),
-				])
-				{
-					if (position.x >= 0 && position.x < Game.TILE_COUNT_X && position.y >= 0 && position.y < Game.TILE_COUNT_Y && !this.game.board[position.x][position.y])
-					{
+				]) {
+					if (position.x >= 0 && position.x < Game.TILE_COUNT_X && position.y >= 0 && position.y < Game.TILE_COUNT_Y && !this.game.board[position.x][position.y]) {
 						tiles.push(position)
 					}
 				}
@@ -106,7 +104,7 @@ class Piece {
 						var position = new Position(this.position.x + vector.x * steps, this.position.y + vector.y * steps)
 
 						if (position.x < 0 || position.x >= Game.TILE_COUNT_X || position.y < 0 || position.y >= Game.TILE_COUNT_Y) {
-							break;
+							break
 						}
 
 						tiles.push(position)
@@ -129,7 +127,7 @@ class Piece {
 						var position = new Position(this.position.x + vector.x * steps, this.position.y + vector.y * steps)
 
 						if (position.x < 0 || position.x >= Game.TILE_COUNT_X || position.y < 0 || position.y >= Game.TILE_COUNT_Y) {
-							break;
+							break
 						}
 
 						tiles.push(position)
@@ -143,9 +141,9 @@ class Piece {
 		}
 
 		for (var tileIndex = tiles.length - 1; tileIndex >= 0; tileIndex--) {
-			var tile = tiles[tileIndex];
+			var tile = tiles[tileIndex]
 			if (tile.x < 0 || tile.x >= Game.TILE_COUNT_X || tile.y < 0 || tile.y >= Game.TILE_COUNT_Y || this.game.board[tile.x][tile.y].isBlack == this.isBlack) {
-				tiles.splice(tileIndex, 1);
+				tiles.splice(tileIndex, 1)
 			}
 		}
 
