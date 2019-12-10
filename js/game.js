@@ -1,9 +1,6 @@
 class Game {
 	static TILE_COUNT_X = 5
 	static TILE_COUNT_Y = 5
-	static TILE_WIDTH = 64
-	static TILE_HEIGHT = 64
-	static BORDER_WIDTH = 8
 
 	constructor(canvas) {
 		this.board = new Array(Game.TILE_COUNT_X)
@@ -40,7 +37,11 @@ class Game {
 	}
 
 	onclick(e) {
-		var tileCoords = new Position(Math.floor((e.offsetX - Game.BORDER_WIDTH) / Game.TILE_WIDTH), Math.floor((e.offsetY - Game.BORDER_WIDTH) / Game.TILE_HEIGHT))
+		var borderWidth = this.canvas.width / (Game.TILE_COUNT_X * 4 + 2);
+		var tileWidth = borderWidth * 4;
+		var tileHeight = tileWidth;
+
+		var tileCoords = new Position(Math.floor((e.offsetX - borderWidth) / tileWidth), Math.floor((e.offsetY - borderWidth) / tileHeight))
 		var piece = this.board[tileCoords.x][tileCoords.y]
 
 		if (this.selectedPiece && tileCoords.equals(this.selectedPiece.position)) {
@@ -67,18 +68,22 @@ class Game {
 	}
 
 	draw() {
+		var borderWidth = this.canvas.width / (Game.TILE_COUNT_X * 4 + 2);
+		var tileWidth = borderWidth * 4;
+		var tileHeight = tileWidth;
+
 		this.context.fillStyle = "white"
 		this.context.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
 		this.context.fillStyle = "#808080"
-		var boardDimensions = [0, 0, Game.TILE_WIDTH * Game.TILE_COUNT_X + Game.BORDER_WIDTH * 2, Game.TILE_HEIGHT * Game.TILE_COUNT_Y + Game.BORDER_WIDTH * 2]
+		var boardDimensions = [0, 0, tileWidth * Game.TILE_COUNT_X + borderWidth * 2, tileHeight * Game.TILE_COUNT_Y + borderWidth * 2]
 		this.context.fillRect(...boardDimensions)
 
 		for (var x = 0; x < Game.TILE_COUNT_X; x++) {
 			for (var y = 0; y < Game.TILE_COUNT_Y; y++) {
 				this.context.fillStyle = (x + y) % 2 ? "#a0a0a0" : "white"
 
-				var tileDimensions = [Game.BORDER_WIDTH + x * Game.TILE_WIDTH, Game.BORDER_WIDTH + y * Game.TILE_HEIGHT, Game.TILE_WIDTH, Game.TILE_HEIGHT]
+				var tileDimensions = [borderWidth + x * tileWidth, borderWidth + y * tileHeight, tileWidth, tileHeight]
 				this.context.fillRect(...tileDimensions)
 
 				if (this.board[x][y] && this.board[x][y].frozen) {
