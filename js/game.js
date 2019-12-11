@@ -53,9 +53,7 @@ class Game {
 			this.selectedPiece = undefined
 			this.activeDestinationTiles = []
 
-			if (Math.random() < 0.95) {
-				this.placeRandomPieces(1)
-			}
+			this.placeRandomPieces(1)
 		}
 		else if (tileCoords.x >= 0 && tileCoords.x < TILE_COUNT_X && tileCoords.y >= 0 && tileCoords.y < TILE_COUNT_Y && piece && !piece.frozen) {
 			this.selectedPiece = piece
