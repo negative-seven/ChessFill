@@ -12,3 +12,11 @@
 	font-family: Arial;
 	font-size: 60;
 }
+
+#instructions {
+	width: 600px;
+	max-width: 100%;
+	font-family: Arial;
+	font-size: 20;
+	margin: 40px auto;
+}
