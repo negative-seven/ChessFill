@@ -92,7 +92,7 @@ class Game {
 				}
 
 				if (this.activeDestinationTiles.some(i => i.x == x && i.y == y)) {
-					this.context.fillStyle = "#109010c0"
+					this.context.fillStyle = "rgba(16, 144, 16, 0.75)"
 					this.context.fillRect(...tileDimensions)
 				}
 
