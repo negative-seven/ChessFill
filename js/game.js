@@ -3,6 +3,13 @@ const TILE_COUNT_Y = 5
 
 class Game {
 	constructor(canvas) {
+		this.canvas = canvas
+		this.context = canvas.getContext("2d")
+
+		this.start()
+	}
+
+	start() {
 		this.board = new Array(TILE_COUNT_X)
 		for (var x = 0; x < TILE_COUNT_Y; x++) {
 			this.board[x] = new Array(TILE_COUNT_Y)
@@ -10,12 +17,11 @@ class Game {
 				this.board[x][y] = 0
 			}
 		}
+
 		this.moves = 0
-
+		document.getElementById("moveCounter").innerText = ("Moves: 0")
+		this.selectedPiece = undefined
 		this.activeDestinationTiles = []
-
-		this.canvas = canvas
-		this.context = canvas.getContext("2d")
 
 		this.placeRandomPieces(14)
 	}
