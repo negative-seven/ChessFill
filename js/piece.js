@@ -27,7 +27,7 @@ class Piece {
 					new Position(1, -1),
 					new Position(1, 1),
 				]) {
-					for (var steps = 1; steps <= 7; steps++) {
+					for (var steps = 1; steps <= this.game.boardSize; steps++) {
 						var position = new Position(this.position.x + vector.x * steps, this.position.y + vector.y * steps)
 
 						if (position.x < 0 || position.x >= this.game.boardSize || position.y < 0 || position.y >= this.game.boardSize) {
@@ -100,7 +100,7 @@ class Piece {
 					new Position(0, -1),
 					new Position(0, 1)
 				]) {
-					for (var steps = 1; steps <= 7; steps++) {
+					for (var steps = 1; steps <= this.game.boardSize; steps++) {
 						var position = new Position(this.position.x + vector.x * steps, this.position.y + vector.y * steps)
 
 						if (position.x < 0 || position.x >= this.game.boardSize || position.y < 0 || position.y >= this.game.boardSize) {
@@ -123,7 +123,7 @@ class Piece {
 					new Position(0, -1),
 					new Position(0, 1)
 				]) {
-					for (var steps = 1; steps <= 7; steps++) {
+					for (var steps = 1; steps < this.game.boardSize; steps++) {
 						var position = new Position(this.position.x + vector.x * steps, this.position.y + vector.y * steps)
 
 						if (position.x < 0 || position.x >= this.game.boardSize || position.y < 0 || position.y >= this.game.boardSize) {
