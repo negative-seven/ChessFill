@@ -30,7 +30,7 @@ class Piece {
 					for (var steps = 1; steps <= 7; steps++) {
 						var position = new Position(this.position.x + vector.x * steps, this.position.y + vector.y * steps)
 
-						if (position.x < 0 || position.x >= TILE_COUNT_X || position.y < 0 || position.y >= TILE_COUNT_Y) {
+						if (position.x < 0 || position.x >= this.game.boardSize || position.y < 0 || position.y >= this.game.boardSize) {
 							break
 						}
 
@@ -72,7 +72,7 @@ class Piece {
 					new Position(this.position.x, this.position.y - 1),
 					new Position(this.position.x, this.position.y + 1),
 				]) {
-					if (position.x >= 0 && position.x < TILE_COUNT_X && position.y >= 0 && position.y < TILE_COUNT_Y && !this.game.board[position.x][position.y]) {
+					if (position.x >= 0 && position.x < this.game.boardSize && position.y >= 0 && position.y < this.game.boardSize && !this.game.board[position.x][position.y]) {
 						tiles.push(position)
 					}
 				}
@@ -83,7 +83,7 @@ class Piece {
 					new Position(this.position.x + 1, this.position.y - 1),
 					new Position(this.position.x + 1, this.position.y + 1),
 				]) {
-					if (position.x >= 0 && position.x < TILE_COUNT_X && position.y >= 0 && position.y < TILE_COUNT_Y && this.game.board[position.x][position.y]) {
+					if (position.x >= 0 && position.x < this.game.boardSize && position.y >= 0 && position.y < this.game.boardSize && this.game.board[position.x][position.y]) {
 						tiles.push(position)
 					}
 				}
@@ -103,7 +103,7 @@ class Piece {
 					for (var steps = 1; steps <= 7; steps++) {
 						var position = new Position(this.position.x + vector.x * steps, this.position.y + vector.y * steps)
 
-						if (position.x < 0 || position.x >= TILE_COUNT_X || position.y < 0 || position.y >= TILE_COUNT_Y) {
+						if (position.x < 0 || position.x >= this.game.boardSize || position.y < 0 || position.y >= this.game.boardSize) {
 							break
 						}
 
@@ -126,7 +126,7 @@ class Piece {
 					for (var steps = 1; steps <= 7; steps++) {
 						var position = new Position(this.position.x + vector.x * steps, this.position.y + vector.y * steps)
 
-						if (position.x < 0 || position.x >= TILE_COUNT_X || position.y < 0 || position.y >= TILE_COUNT_Y) {
+						if (position.x < 0 || position.x >= this.game.boardSize || position.y < 0 || position.y >= this.game.boardSize) {
 							break
 						}
 
@@ -142,7 +142,7 @@ class Piece {
 
 		for (var tileIndex = tiles.length - 1; tileIndex >= 0; tileIndex--) {
 			var tile = tiles[tileIndex]
-			if (tile.x < 0 || tile.x >= TILE_COUNT_X || tile.y < 0 || tile.y >= TILE_COUNT_Y || this.game.board[tile.x][tile.y].isBlack == this.isBlack) {
+			if (tile.x < 0 || tile.x >= this.game.boardSize || tile.y < 0 || tile.y >= this.game.boardSize || this.game.board[tile.x][tile.y].isBlack == this.isBlack) {
 				tiles.splice(tileIndex, 1)
 			}
 		}

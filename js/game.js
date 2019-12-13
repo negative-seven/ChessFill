@@ -1,6 +1,3 @@
-const TILE_COUNT_X = 5
-const TILE_COUNT_Y = 5
-
 class Game {
 	constructor(canvas) {
 		this.canvas = canvas
@@ -10,10 +7,13 @@ class Game {
 	}
 
 	start() {
-		this.board = new Array(TILE_COUNT_X)
-		for (var x = 0; x < TILE_COUNT_Y; x++) {
-			this.board[x] = new Array(TILE_COUNT_Y)
-			for (var y = 0; y < TILE_COUNT_Y; y++) {
+		this.boardSize = parseInt(document.getElementById("boardSize").value);
+		this.pieceSpawnChance = parseInt(document.getElementById("spawnChance").value);
+
+		this.board = new Array(this.boardSize)
+		for (var x = 0; x < this.boardSize; x++) {
+			this.board[x] = new Array(this.boardSize)
+			for (var y = 0; y < this.boardSize; y++) {
 				this.board[x][y] = 0
 			}
 		}
@@ -23,7 +23,7 @@ class Game {
 		this.selectedPiece = undefined
 		this.activeDestinationTiles = []
 
-		this.placeRandomPieces(14)
+		this.placeRandomPieces(Math.ceil(this.boardSize * this.boardSize / 2) + 1)
 	}
 
 	update() {
@@ -43,7 +43,7 @@ class Game {
 	}
 
 	onclick(e) {
-		var borderWidth = this.canvas.width / (TILE_COUNT_X * 4 + 2);
+		var borderWidth = this.canvas.width / (this.boardSize * 4 + 2);
 		var tileWidth = borderWidth * 4;
 		var tileHeight = tileWidth;
 
@@ -59,9 +59,11 @@ class Game {
 			this.selectedPiece = undefined
 			this.activeDestinationTiles = []
 
-			this.placeRandomPieces(1)
+			if (Math.random() < this.pieceSpawnChance) {
+				this.placeRandomPieces(1)
+			}
 		}
-		else if (tileCoords.x >= 0 && tileCoords.x < TILE_COUNT_X && tileCoords.y >= 0 && tileCoords.y < TILE_COUNT_Y && piece && !piece.frozen) {
+		else if (tileCoords.x >= 0 && tileCoords.x < this.boardSize && tileCoords.y >= 0 && tileCoords.y < this.boardSize && piece && !piece.frozen) {
 			this.selectedPiece = piece
 			this.activeDestinationTiles = piece.getDestinationTiles()
 		}
@@ -72,7 +74,7 @@ class Game {
 	}
 
 	draw() {
-		var borderWidth = this.canvas.width / (TILE_COUNT_X * 4 + 2);
+		var borderWidth = this.canvas.width / (this.boardSize * 4 + 2);
 		var tileWidth = borderWidth * 4;
 		var tileHeight = tileWidth;
 
@@ -80,11 +82,11 @@ class Game {
 		this.context.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
 		this.context.fillStyle = "#808080"
-		var boardDimensions = [0, 0, tileWidth * TILE_COUNT_X + borderWidth * 2, tileHeight * TILE_COUNT_Y + borderWidth * 2]
+		var boardDimensions = [0, 0, tileWidth * this.boardSize + borderWidth * 2, tileHeight * this.boardSize + borderWidth * 2]
 		this.context.fillRect(...boardDimensions)
 
-		for (var x = 0; x < TILE_COUNT_X; x++) {
-			for (var y = 0; y < TILE_COUNT_Y; y++) {
+		for (var x = 0; x < this.boardSize; x++) {
+			for (var y = 0; y < this.boardSize; y++) {
 				this.context.fillStyle = (x + y) % 2 ? "#a0a0a0" : "white"
 
 				var tileDimensions = [borderWidth + x * tileWidth, borderWidth + y * tileHeight, tileWidth, tileHeight]
@@ -134,8 +136,8 @@ class Game {
 
 	placeRandomPieces(count) {
 		var freeTiles = []
-		for (var x = 0; x < TILE_COUNT_X; x++) {
-			for (var y = 0; y < TILE_COUNT_Y; y++) {
+		for (var x = 0; x < this.boardSize; x++) {
+			for (var y = 0; y < this.boardSize; y++) {
 				if (this.board[x][y] == 0) {
 					freeTiles.push(new Position(x, y))
 				}

@@ -25,6 +25,33 @@ button {
 	font-size: 20;
 }
 
+#settings {
+	width: 600px;
+	margin: 10px auto;
+	display: flex;
+}
+
+#settingsLabels {
+	text-align: right;
+	margin-right: 10px;
+}
+
+#settingsInputs {
+	text-align: left;
+}
+
+#settingsInputs input {
+	width: 80%;
+	vertical-align: middle;
+}
+
+#settingsLabels, #settingsInputs {
+	flex-grow: 1;
+	flex-basis: 0;
+	flex-direction: column;
+	line-height: 40px;
+}
+
 #instructions {
 	width: 600px;
 	max-width: 100%;

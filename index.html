@@ -10,8 +10,17 @@
 	<div id="game">
 		<canvas id="canvas" width=700 height=700></canvas>
 		<div id="moveCounter">Moves: 0</div>
-		<div id="buttonPanel">
-			<button id="restartButton" onclick="game.start()">Restart</button>
+		<button id="restartButton" onclick="restartButtonClick()">Restart</button>
+		<button id="settingsButton" onclick="settingsButtonClick()">Settings</button>
+		<div id="settings" style="display: none;">
+			<div id="settingsLabels">
+				<div>Board size:</div>
+				<div>Piece spawn chance:</div>
+			</div>
+			<div id="settingsInputs">
+				<div><input type="range" min=3 max=10 value=5 id="boardSize" oninput="boardSizeChange()"> <span id="boardSizeNumber">5</span></div>
+				<div><input type="range" min=0 max=100 value=100 id="spawnChance" oninput="spawnChanceChange()"> <span id="spawnChanceNumber">100</span></div>
+			</div>
 		</div>
 	</div>
 	
@@ -38,6 +47,7 @@
 	<script src="js/piece.js"></script>
 	<script src="js/game.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/settings.js"></script>
 </body>
 
 </html>
